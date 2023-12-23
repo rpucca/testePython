@@ -1,54 +1,69 @@
 import os
 
-def exibir_nome_do_programa():
-    print('''
-    ░██████╗░█████╗░██████╗░░█████╗░██████╗░  ███████╗██╗░░██╗██████╗░██████╗░███████╗░██████╗░██████╗
-    ██╔════╝██╔══██╗██╔══██╗██╔══██╗██╔══██╗  ██╔════╝╚██╗██╔╝██╔══██╗██╔══██╗██╔════╝██╔════╝██╔════╝
-    ╚█████╗░███████║██████╦╝██║░░██║██████╔╝  █████╗░░░╚███╔╝░██████╔╝██████╔╝█████╗░░╚█████╗░╚█████╗░
-    ░╚═══██╗██╔══██║██╔══██╗██║░░██║██╔══██╗  ██╔══╝░░░██╔██╗░██╔═══╝░██╔══██╗██╔══╝░░░╚═══██╗░╚═══██╗
-    ██████╔╝██║░░██║██████╦╝╚█████╔╝██║░░██║  ███████╗██╔╝╚██╗██║░░░░░██║░░██║███████╗██████╔╝██████╔╝
-    ╚═════╝░╚═╝░░╚═╝╚═════╝░░╚════╝░╚═╝░░╚═╝  ╚══════╝╚═╝░░╚═╝╚═╝░░░░░╚═╝░░╚═╝╚══════╝╚═════╝░╚═════╝░     
-        ''')
+restaurante_array = ['Pizza','Sushi']
 
-def exibir_opcoes():    
+def opcoes_exibir():    
     print('1.Cadastrar Restaurante')
     print('2.Listar Restaurante')
     print('3.Ativar Restaurante')
     print('4.Sair\n')
 
+def opcoes_escolher():
+    try:
+        opcao_escolhida = int(input('Escolha uma opção:'))
+        match opcao_escolhida:
+            case 1:
+                restaurante_cadastrar()
+            case 2:
+                restaurante_listar()
+            case 3:
+                print('Ativar restaurante')
+            case 4:
+                app_finalizar()
+            case _:
+                opcao_invalida()
+    except:
+            opcao_invalida()
 
-def escolher_opcoes():
-    opcao_escolhida = int(input('Escolha uma opção:'))
-    '''if opcao_escolhida == 1:
-        print('Cadastras restaurante')
-    elif opcao_escolhida == 2:
-        print('Listar restaurante')
-    elif opcao_escolhida == 3:  
-        print('Ativar restaurante')
-    else:
-        finalizar_app()'''
-
-    match opcao_escolhida:
-        case 1:
-            print('Adicionar restaurante')
-        case 2:
-            print('Listar restaurantes')
-        case 3:
-            print('Ativar restaurante')
-        case 4:
-            print('Finalizar app')
-        case _:
-            print('Opção inválida!')
-
-def finalizar_app():
+def titulo_exibir(texto):
     os.system('cls')
-    print('Fim do app\n')
-    #return
+    print(texto)
+    print()
 
-def main():     
-    exibir_nome_do_programa()
-    exibir_opcoes()
-    escolher_opcoes()
+def menu_voltar():
+    input('\nDigite uma tecla para voltar ao menu.')
+    main()
+
+def opcao_invalida():
+    print('Opção inválida!\n')
+    menu_voltar()
+
+def restaurante_cadastrar():
+    titulo_exibir('Cadastrar restaurante')
+    restaurante_nome = str(input('Nome do restaurante:'))
+    restaurante_array.append(restaurante_nome)
+    print(f'O restaurante {restaurante_nome} foi cadastrado.')
+    menu_voltar()
+
+def restaurante_listar():
+    titulo_exibir('Listar restaurante')
+    for restaurante_nome in restaurante_array:
+        print(f'.{restaurante_nome}')
+    menu_voltar()        
+
+def app_finalizar():
+    titulo_exibir('Fim do app')
+
+def main(): 
+    titulo_exibir('''
+    ░██████╗░█████╗░██████╗░░█████╗░██████╗░  ███████╗██╗░░██╗██████╗░██████╗░███████╗░██████╗░██████╗
+    ██╔════╝██╔══██╗██╔══██╗██╔══██╗██╔══██╗  ██╔════╝╚██╗██╔╝██╔══██╗██╔══██╗██╔════╝██╔════╝██╔════╝
+    ╚█████╗░███████║██████╦╝██║░░██║██████╔╝  █████╗░░░╚███╔╝░██████╔╝██████╔╝█████╗░░╚█████╗░╚█████╗░
+    ░╚═══██╗██╔══██║██╔══██╗██║░░██║██╔══██╗  ██╔══╝░░░██╔██╗░██╔═══╝░██╔══██╗██╔══╝░░░╚═══██╗░╚═══██╗
+    ██████╔╝██║░░██║██████╦╝╚█████╔╝██║░░██║  ███████╗██╔╝╚██╗██║░░░░░██║░░██║███████╗██████╔╝██████╔╝
+    ╚═════╝░╚═╝░░╚═╝╚═════╝░░╚════╝░╚═╝░░╚═╝  ╚══════╝╚═╝░░╚═╝╚═╝░░░░░╚═╝░░╚═╝╚══════╝╚═════╝░╚═════╝░''')    
+    opcoes_exibir()
+    opcoes_escolher()
 
 if __name__ == '__main__':
     main()    
@@ -61,4 +76,13 @@ print('A','L','U','R','A',sep='\n')
 print(f'Opção:{opcao_escolhida}!') #print(f <- interpolação de strings
 print(opcao_escolhida==1)
 print(type(opcao_escolhida))
-print(type(1))'''
+print(type(1))
+
+if opcao_escolhida == 1:
+    print('Cadastras restaurante')
+elif opcao_escolhida == 2:
+    print('Listar restaurante')
+elif opcao_escolhida == 3:  
+    print('Ativar restaurante')
+else:
+    app_finalizar()'''

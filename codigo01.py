@@ -3,3 +3,5 @@
 print('Estou no codigo01')
 if __name__ == '__main__':
     print('Executei no terminal o comando python codigo01, logo esse é o __main__') 
+
+    
