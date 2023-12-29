@@ -1,11 +1,16 @@
 import os
 
-restaurante_array = ['Pizza','Sushi']
-
+#restaurante_array = ['Pizza','Sushi']
+restaurante_array = [ {'nome':'Pizza',  'categoria':'Pizza'   , 'ativo': False},
+                      {'nome':'Shushi', 'categoria':'Italiano', 'ativo': True},
+                      {'nome':'Tartai', 'categoria':'Espanhol', 'ativo': False},
+                      {'nome':'x'     , 'categoria':'y'       , 'ativo': False}                      
+                    ]
+                                        
 def opcoes_exibir():    
     print('1.Cadastrar Restaurante')
     print('2.Listar Restaurante')
-    print('3.Ativar Restaurante')
+    print('3.Alterar Status Restaurante')
     print('4.Sair\n')
 
 def opcoes_escolher():
@@ -17,7 +22,7 @@ def opcoes_escolher():
             case 2:
                 restaurante_listar()
             case 3:
-                print('Ativar restaurante')
+                restaurante_alterar_status()
             case 4:
                 app_finalizar()
             case _:
@@ -25,10 +30,11 @@ def opcoes_escolher():
     except:
             opcao_invalida()
 
-def titulo_exibir(texto):
+def titulo_exibir(texto):    
     os.system('cls')
-    print(texto)
-    print()
+    linha = '*' * (len(texto))
+    print(f'{linha}\n{texto}\n{linha}') 
+    print()   
 
 def menu_voltar():
     input('\nDigite uma tecla para voltar ao menu.')
@@ -39,16 +45,46 @@ def opcao_invalida():
     menu_voltar()
 
 def restaurante_cadastrar():
-    titulo_exibir('Cadastrar restaurante')
-    restaurante_nome = str(input('Nome do restaurante:'))
-    restaurante_array.append(restaurante_nome)
-    print(f'O restaurante {restaurante_nome} foi cadastrado.')
+    titulo_exibir('Cadastrar restaurante')    
+    var_nome      = str(input('Nome do restaurante:'))
+    var_categoria = str(input(f'Categoria do restaurante {var_nome}:'))
+
+    restaurante_array.append({'nome':var_nome,'categoria':var_categoria,'ativo':False})
+
+    print(f'O restaurante {var_nome} foi cadastrado.')
     menu_voltar()
 
 def restaurante_listar():
     titulo_exibir('Listar restaurante')
-    for restaurante_nome in restaurante_array:
-        print(f'.{restaurante_nome}')
+    
+    print(f'{'Nome'.ljust(20)} | {'Categoria'.ljust(20)} | Ativado/Desativado')
+    print('*' * 20 | '*' * 20 | '*' * 20) 
+    for restaurante_item in restaurante_array:
+        var_nome      = restaurante_item['nome']
+        var_categoria = restaurante_item['categoria'] 
+        var_ativo     = restaurante_item['ativo']
+
+        print(f'{var_nome.ljust(20)} | {var_categoria.ljust(20)} | {var_ativo}')
+    menu_voltar()        
+
+def restaurante_alterar_status():
+    titulo_exibir('Alterar status restaurante')
+    var_nome = str(input('Qual restaurante vc quer alterar status?'))
+    var_achou = False
+
+    for restaurante_item in restaurante_array:
+        if var_nome == restaurante_item['nome']:
+            var_achou = True
+            restaurante_item['ativo'] = not restaurante_item['ativo']
+            print(f'O status do restaurante {restaurante_item['nome']} foi alterado de {not restaurante_item['ativo']} para {restaurante_item['ativo']}.')
+        
+            teste = 'ativado' if  restaurante_item['ativo'] else 'desativado'
+            print(f'teste:{teste}')
+
+
+    if not var_achou:
+        print('Esse nome não existe!')
+
     menu_voltar()        
 
 def app_finalizar():
