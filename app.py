@@ -57,14 +57,13 @@ def restaurante_cadastrar():
 def restaurante_listar():
     titulo_exibir('Listar restaurante')
     
-    print(f'{'Nome'.ljust(20)} | {'Categoria'.ljust(20)} | Ativado/Desativado')
-    print('*' * 20 | '*' * 20 | '*' * 20) 
+    print(f'{'Nome'.ljust(20)} | {'Categoria'.ljust(20)} | Status')
     for restaurante_item in restaurante_array:
         var_nome      = restaurante_item['nome']
         var_categoria = restaurante_item['categoria'] 
-        var_ativo     = restaurante_item['ativo']
+        var_status = 'ativo' if restaurante_item['ativo'] else 'desativado'
 
-        print(f'{var_nome.ljust(20)} | {var_categoria.ljust(20)} | {var_ativo}')
+        print(f'{var_nome.ljust(20)} | {var_categoria.ljust(20)} | {var_status}')
     menu_voltar()        
 
 def restaurante_alterar_status():
@@ -91,7 +90,7 @@ def app_finalizar():
     titulo_exibir('Fim do app')
 
 def main(): 
-    titulo_exibir('''
+    print('''
     ░██████╗░█████╗░██████╗░░█████╗░██████╗░  ███████╗██╗░░██╗██████╗░██████╗░███████╗░██████╗░██████╗
     ██╔════╝██╔══██╗██╔══██╗██╔══██╗██╔══██╗  ██╔════╝╚██╗██╔╝██╔══██╗██╔══██╗██╔════╝██╔════╝██╔════╝
     ╚█████╗░███████║██████╦╝██║░░██║██████╔╝  █████╗░░░╚███╔╝░██████╔╝██████╔╝█████╗░░╚█████╗░╚█████╗░
