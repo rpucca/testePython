@@ -80,7 +80,6 @@ def restaurante_alterar_status():
             teste = 'ativado' if  restaurante_item['ativo'] else 'desativado'
             print(f'teste:{teste}')
 
-
     if not var_achou:
         print('Esse nome não existe!')
 
